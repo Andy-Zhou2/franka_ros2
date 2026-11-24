@@ -16,6 +16,15 @@ The ``franka_gripper_node`` provides the following actions:
 
 Also, there is a ``stop`` service that aborts gripper actions and stops grasping.
 
+Topics
+------
+
+The ``franka_gripper_node`` publishes the following topics at ``state_publish_rate`` (default 15 Hz from the config file):
+
+* ``joint_states`` (``sensor_msgs/JointState``) - the finger positions (half the gripper width each).
+* ``is_grasped`` (``std_msgs/Bool``) - ``franka::GripperState::is_grasped`` as reported by the gripper firmware, i.e.
+  whether an object is currently grasped (see the ``grasp`` action for the ``epsilon`` criterion).
+
 Usage
 -----
 

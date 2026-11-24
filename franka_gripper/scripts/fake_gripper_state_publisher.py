@@ -17,6 +17,7 @@ import rclpy
 from rclpy import Parameter
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
+from std_msgs.msg import Bool
 
 
 class FakeGripperStatePublisher(Node):
@@ -24,6 +25,7 @@ class FakeGripperStatePublisher(Node):
     def __init__(self):
         super().__init__('fake_gripper_state_publisher')
         self.publisher_ = self.create_publisher(JointState, '~/joint_states', 1)
+        self.is_grasped_publisher_ = self.create_publisher(Bool, '~/is_grasped', 1)
         timer_period = 0.1  # seconds
 
         self.declare_parameter('joint_names', Parameter.Type.STRING_ARRAY)
@@ -42,6 +44,7 @@ class FakeGripperStatePublisher(Node):
         joint_states.velocity = [0.0, 0.0]
         joint_states.effort = [0.0, 0.0]
         self.publisher_.publish(joint_states)
+        self.is_grasped_publisher_.publish(Bool(data=False))
 
 
 def main(args=None):

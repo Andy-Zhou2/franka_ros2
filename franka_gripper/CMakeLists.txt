@@ -21,6 +21,7 @@ find_package(rclcpp_action REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(std_srvs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
 find_package(control_msgs REQUIRED)
 
 find_package(Franka 0.13.2 REQUIRED)
@@ -39,6 +40,7 @@ ament_target_dependencies(gripper_server
         rclcpp_components
         Franka
         sensor_msgs
+        std_msgs
         std_srvs
         control_msgs)
 rclcpp_components_register_node(gripper_server PLUGIN "franka_gripper::GripperActionServer" EXECUTABLE franka_gripper_node)
